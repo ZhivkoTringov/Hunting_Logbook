@@ -1,5 +1,4 @@
-
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -10,16 +9,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fimt=i+jn&nyz4x8)0cb=zi@51kom@-o8_l!gw*n%1d@9008g('
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.getenv('DEBUG', default=0))
 
-ALLOWED_HOSTS = []
-
-CORS_ALLOWED_ORIGINS = (
-    'https://localhost:3001',
+ALLOWED_HOSTS = (
+    os.getenv('ALLOWED_HOSTS').split(' ')
 )
+
+# CORS_ALLOWED_ORIGINS = (
+#     'https://localhost:3001',
+# )
 
 
 # Application definition
@@ -32,11 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',
-    'rest_framework.authtoken',
-    'corsheaders',
+    # 'rest_framework',
+    # 'rest_framework.authtoken',
+    # 'corsheaders',
 
-    'accounts',
+    # 'accounts',
 ]
 
 MIDDLEWARE = [

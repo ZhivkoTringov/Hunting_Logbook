@@ -7,7 +7,7 @@ __pycache__
 # ENV files and folders
 backend/.env
 frontend/.env
-.env
+.env.dev
 
 #KEYS
 keys/
