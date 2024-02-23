@@ -8,6 +8,7 @@ __pycache__
 backend/.env
 frontend/.env
 .env.dev
+.env
 
 #KEYS
 keys/
