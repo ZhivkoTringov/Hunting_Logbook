@@ -1,27 +1,31 @@
 import os
+
+from datetime import timedelta
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv('DEBUG', default=0))
+DEBUG = True
 
-ALLOWED_HOSTS = (
-    os.getenv('ALLOWED_HOSTS').split(' ')
-)
+ALLOWED_HOSTS = ["*"]
 
 # CORS_ALLOWED_ORIGINS = (
 #     'https://localhost:3001',
 # )
-
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 
 # Application definition
 
@@ -33,11 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'rest_framework',
-    # 'rest_framework.authtoken',
-    # 'corsheaders',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 
-    # 'accounts',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +82,12 @@ WSGI_APPLICATION = 'logbook.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv("POSTGRES_ENGINE", 'django.db.backends.sqlite3'),
-        'NAME': os.getenv("POSTGRES_NAME", BASE_DIR / 'db.sqlite3'),
-        'USER': os.getenv("POSTGRES_USER", "user"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "password"),
-        "HOST": os.getenv("POSTGRES_HOST", "localhost"),
-        "PORT": os.getenv("POSTGRES_PORT", "5432"),
+        'ENGINE': "django.db.backends.postgresql",
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': "postgres",
+        'PASSWORD': "postgres",
+        'HOST': os.getenv("POSTGRES_HOST"),
+        'PORT': os.getenv("POSTGRES_PORT"),
     }
 }
 
