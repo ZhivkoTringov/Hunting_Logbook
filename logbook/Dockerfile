@@ -12,6 +12,11 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY ./manage.py .
+COPY ./entrypoint.sh .
 
-COPY . .
+COPY ./ .
+
+RUN sed -i 's/\r$//g' /usr/src/app/entrypoint.sh
+RUN chmod +x /usr/src/app/entrypoint.sh
+
+CMD ["sh", "entrypoint.sh"]
